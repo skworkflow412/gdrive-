@@ -1,1 +1,19 @@
 
+version: "3.8"
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+      - mongodb
+    environment:
+      - FLASK_SECRET_KEY=mysecret
+      - MONGO_URI=mongodb://mongodb:27017/
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+  redis:
+    image: "redis:alpine"
+  mongodb:
+    image: "mongo:latest"
