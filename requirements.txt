@@ -1,1 +1,10 @@
-l
+
+Flask
+requests
+pymongo
+Flask-Limiter
+Flask-Login
+gunicorn
+redis
+celery
+moviepy
