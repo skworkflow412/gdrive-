@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GDrive to StreamTape & FilePress</title>
+</head>
+<body>
+    <h2>Upload Google Drive Video</h2>
+    <form id="uploadForm">
+        <input type="text" id="gdrive_link" placeholder="Enter Google Drive Link">
+        <button type="submit">Upload</button>
+    </form>
+    <p id="response"></p>
+    <script>
+        document.getElementById("uploadForm").onsubmit = async function(e) {
+            e.preventDefault();
+            let gdrive_link = document.getElementById("gdrive_link").value;
+            let response = await fetch("/upload", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ gdrive_link })
+            });
+            let data = await response.json();
+            document.getElementById("response").innerText = JSON.stringify(data);
+        }
+    </script>
+</body>
+</html>
